@@ -14,7 +14,7 @@ public class SpawnerController : MonoBehaviour
 
     private void Awake()
     {
-        spawnDelay = Random.Range(6, 10);
+        spawnDelay = Random.Range(1, 10);
     }
 
     void Update()
@@ -26,7 +26,7 @@ public class SpawnerController : MonoBehaviour
         if (time < spawnDelay)
             return;
 
-        spawnDelay = Random.Range(6, 25);
+        spawnDelay = Random.Range(6, 16);
         time = 0;
 
         Instantiate(mob, transform);
