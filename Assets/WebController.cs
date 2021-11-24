@@ -14,8 +14,14 @@ public class WebController : MonoBehaviour
     private float maxDistance = 10000f;
     private SpringJoint joint;
 
+    public GameObject hand;
+
     private bool startGrapple;
     private bool stopGrapple;
+
+    private float pullBiasSpeed;
+
+    public InputActionReference pullTrigger;
 
     public InputActionReference webTrigger;
     void Awake()
@@ -23,12 +29,28 @@ public class WebController : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         webTrigger.action.started += HandleTriggerPressed;
         webTrigger.action.canceled += HandleTriggerReleased;
+        pullTrigger.action.performed += HandlePull;
+        pullTrigger.action.canceled += HandlePullFinished;
+    }
+
+    private void HandlePullFinished(InputAction.CallbackContext obj)
+    {
+        pullBiasSpeed = 0;
+        TextManager.instance.SetTopRight(pullBiasSpeed.ToString());
+    }
+
+    private void HandlePull(InputAction.CallbackContext obj)
+    {
+        pullBiasSpeed = obj.ReadValue<Vector2>().y;
+        TextManager.instance.SetTopRight(pullBiasSpeed.ToString());
     }
 
     private void OnDestroy()
     {
         webTrigger.action.started -= HandleTriggerPressed;
         webTrigger.action.canceled -= HandleTriggerReleased;
+        pullTrigger.action.performed -= HandlePull;
+        pullTrigger.action.canceled -= HandlePullFinished;
     }
 
     void Update()
@@ -43,6 +65,12 @@ public class WebController : MonoBehaviour
             StopGrapple();
             stopGrapple = false;
         }
+
+        if (joint != default)
+        {
+            joint.maxDistance = Mathf.Max(joint.maxDistance + pullBiasSpeed * Time.deltaTime * 15.0f, 0.7f);
+            TextManager.instance.SetBottomRight(joint.maxDistance.ToString());
+        }
     }
 
     //Called after Update
@@ -56,6 +84,7 @@ public class WebController : MonoBehaviour
     /// </summary>
     void StartGrapple()
     {
+        hand.SetActive(false);
         RaycastHit hit;
         if (Physics.Raycast(gunTip.position, gunTip.forward, out hit, maxDistance, whatIsGrappleable))
         {
@@ -67,12 +96,12 @@ public class WebController : MonoBehaviour
             float distanceFromPoint = Vector3.Distance(gunTip.position, grapplePoint);
 
             //The distance grapple will try to keep from grapple point. 
-            joint.maxDistance = distanceFromPoint * 0.8f;
-            joint.minDistance = distanceFromPoint * 0.25f;
+            joint.maxDistance = distanceFromPoint * 0.9f;
+            joint.minDistance = 0.6f;
 
             //Adjust these values to fit your game.
-            joint.spring = 4.5f;
-            joint.damper = 7f;
+            joint.spring = 25.0f;
+            joint.damper = 50.0f;
             joint.massScale = 4.5f;
 
             lineRenderer.positionCount = 2;
@@ -89,6 +118,7 @@ public class WebController : MonoBehaviour
         lineRenderer.positionCount = 0;
         lineRenderer.enabled = false;
         Destroy(joint);
+        hand.SetActive(true);
     }
 
     private Vector3 currentGrapplePosition;

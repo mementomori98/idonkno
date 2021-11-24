@@ -14,7 +14,7 @@ public class GunController : MonoBehaviour
     {
         var bullet = Instantiate(projectile, gunTip.transform.position, gunTip.transform.rotation * Quaternion.Euler(Vector3.forward * 90), world.transform);
         var rb = bullet.GetComponent<Rigidbody>();
-        rb.AddForce(gameObject.transform.right.normalized * 20, ForceMode.VelocityChange);
+        rb.AddForce(gameObject.transform.right.normalized * 50, ForceMode.VelocityChange);
     }
 
     private void Awake()

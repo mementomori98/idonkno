@@ -925,6 +925,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Pull",
+                    "type": "Button",
+                    "id": "559509ce-dcc9-4ab3-8e9f-03de5b83ee90",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -958,6 +966,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Replace",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "811db34b-39de-48b4-a1ef-43c34f0915ba",
+                    "path": "<XRController>{LeftHand}/Primary2DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Continuous Move",
+                    "action": "Pull",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

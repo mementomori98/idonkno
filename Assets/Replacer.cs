@@ -11,7 +11,7 @@ public class Replacer : MonoBehaviour
 
     private void Replace(InputAction.CallbackContext c)
     {
-        gameObject.transform.position = Vector3.zero;
+        gameObject.transform.position = Vector3.zero + Vector3.up * 20;
         var rb = gameObject.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
     }

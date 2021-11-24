@@ -8,7 +8,7 @@ public class SpawnerController : MonoBehaviour
     public GameObject mob;
 
     private float time;
-    private const float spawnDelay = 6.0f;
+    private const float spawnDelay = 60.0f;
 
     void Update()
     {
