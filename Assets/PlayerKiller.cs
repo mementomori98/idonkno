@@ -28,9 +28,11 @@ public class PlayerKiller : MonoBehaviour
         {
             var player = GameObject.FindGameObjectWithTag("Player");
             player.transform.position = Vector3.zero + Vector3.up * 14;
+            player.GetComponent<Rigidbody>().velocity = Vector3.zero;
             var enemies = GameObject.FindGameObjectsWithTag("monster");
             foreach (var enemy in enemies)
                 Destroy(enemy);
+            TextManager.instance.center.text = "";
         }
     }
 }

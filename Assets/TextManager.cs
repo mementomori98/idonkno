@@ -23,6 +23,7 @@ public class TextManager : MonoBehaviour
         topRight.text = "";
         bottomLeft.text = "";
         bottomRight.text = "";
+        center.text = "";
     }
 
     public void SetTopLeft(string text)

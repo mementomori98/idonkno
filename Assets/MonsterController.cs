@@ -21,6 +21,11 @@ public class MonsterController : MonoBehaviour
         dir = dir.normalized;
         var rotation = Quaternion.LookRotation(dir);
         gameObject.transform.rotation = rotation;
-        rb.velocity = dir * 6;
+        rb.velocity = dir * 15;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        throw new NotImplementedException();
     }
 }

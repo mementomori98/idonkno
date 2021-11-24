@@ -8,12 +8,16 @@ public class Replacer : MonoBehaviour
 {
 
     public InputActionReference replace;
+    public Vector3 position;
 
     private void Replace(InputAction.CallbackContext c)
     {
-        gameObject.transform.position = Vector3.zero + Vector3.up * 20;
+        gameObject.transform.position = position;
         var rb = gameObject.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
+        var enemies = GameObject.FindGameObjectsWithTag("monster");
+        foreach (var e in enemies)
+            Destroy(e);
     }
 
     private void Awake()

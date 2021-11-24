@@ -933,6 +933,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Replace2",
+                    "type": "Button",
+                    "id": "49b4119b-cf46-4766-924e-b83e5cc57e6e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -977,6 +985,17 @@
                     "processors": "",
                     "groups": "Continuous Move",
                     "action": "Pull",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb5a55be-67ed-4f87-bf8f-f65c764e49a3",
+                    "path": "<XRController>{LeftHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Replace2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

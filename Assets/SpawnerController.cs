@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpawnerController : MonoBehaviour
 {
@@ -8,15 +10,24 @@ public class SpawnerController : MonoBehaviour
     public GameObject mob;
 
     private float time;
-    private const float spawnDelay = 60.0f;
+    private float spawnDelay;
+
+    private void Awake()
+    {
+        spawnDelay = Random.Range(6, 10);
+    }
 
     void Update()
     {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if ((player.transform.position - transform.position).magnitude > 200)
+            return;
         time += Time.deltaTime;
         if (time < spawnDelay)
             return;
 
-        time -= spawnDelay;
+        spawnDelay = Random.Range(6, 25);
+        time = 0;
 
         Instantiate(mob, transform);
     }
