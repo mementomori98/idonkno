@@ -36,13 +36,11 @@ public class WebController : MonoBehaviour
     private void HandlePullFinished(InputAction.CallbackContext obj)
     {
         pullBiasSpeed = 0;
-        TextManager.instance.SetTopRight(pullBiasSpeed.ToString());
     }
 
     private void HandlePull(InputAction.CallbackContext obj)
     {
         pullBiasSpeed = obj.ReadValue<Vector2>().y;
-        TextManager.instance.SetTopRight(pullBiasSpeed.ToString());
     }
 
     private void OnDestroy()
@@ -69,7 +67,6 @@ public class WebController : MonoBehaviour
         if (joint != default)
         {
             joint.maxDistance = Mathf.Max(joint.maxDistance + pullBiasSpeed * Time.deltaTime * 15.0f, 0.7f);
-            TextManager.instance.SetBottomRight(joint.maxDistance.ToString());
         }
     }
 
